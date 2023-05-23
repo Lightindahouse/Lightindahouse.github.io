@@ -42,9 +42,15 @@
         box-sizing: border-box;
         margin-top: 10px;
       }
+      .top-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
       .button-container {
         display: flex;
-        justify-content: flex-end;
+        justify-content: flex-start;
         align-items: center;
         margin-top: 10px;
       }
@@ -58,14 +64,17 @@
     </style>
   </head>
   <body>
-    <h1>Fluxus Theme Generator (Windows)</h1>
+    <h1>Fluxus Theme Generator (Windows)</h>
+    <div class="top-buttons">
+      <button type="button" id="youtube-btn">YouTube</button>
+      <button type="button" id="discord-btn">Join our Discord server</button>
+    </div>
     <form>
       <label for="image-link">Enter image link:</label>
       <input type="text" id="image-link" name="image-link">
       <div class="button-container">
         <button type="submit" id="submit-btn">Submit</button>
         <button type="button" id="download-btn" style="display: none;">Download Theme</button>
-        <button type="button" id="youtube-btn" style="display: none;">YouTube</button>
       </div>
       <div id="error-message" class="error-message" style="display: none;"></div>
     </form>
@@ -96,7 +105,6 @@
             const outputBox = document.getElementById("output-box");
             outputBox.innerHTML = "<textarea readonly>" + JSON.stringify(output, null, 4) + "</textarea>";
             document.getElementById("download-btn").style.display = "block";
-            document.getElementById("youtube-btn").style.display = "block";
           } else {
             document.getElementById("image-link").value = "";
             document.getElementById("image-link").focus();
@@ -113,9 +121,13 @@
       function openYouTube() {
         window.open("https://www.youtube.com/watch?v=h7vrOI6L8YQ", "_blank");
       }
+      function openDiscord() {
+        window.open("https://discord.gg/fluxus", "_blank");
+      }
       document.getElementById("submit-btn").addEventListener("click", validateForm);
       document.getElementById("download-btn").addEventListener("click", downloadFile);
       document.getElementById("youtube-btn").addEventListener("click", openYouTube);
+      document.getElementById("discord-btn").addEventListener("click", openDiscord);
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
   </body>
