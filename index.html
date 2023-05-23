@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-   <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>Fluxus Theme Generator</title>
     <style>
       body {
@@ -51,10 +51,14 @@
       .button-container button {
         margin-left: 10px;
       }
+      .error-message {
+        color: #ff0000;
+        margin-top: 10px;
+      }
     </style>
   </head>
   <body>
-    <h1>Fluxus Theme Generator ( Windows )</h1>
+    <h1>Fluxus Theme Generator (Windows)</h1>
     <form>
       <label for="image-link">Enter image link:</label>
       <input type="text" id="image-link" name="image-link">
@@ -63,14 +67,24 @@
         <button type="button" id="download-btn" style="display: none;">Download Theme</button>
         <button type="button" id="youtube-btn" style="display: none;">YouTube</button>
       </div>
+      <div id="error-message" class="error-message" style="display: none;"></div>
     </form>
     <div id="output-box"></div>
     <script>
       function confirmImageLink(imagelink) {
         return confirm("Image link is: " + imagelink + " Are you sure?");
       }
+      function showError(message) {
+        const errorMessage = document.getElementById("error-message");
+        errorMessage.textContent = message;
+        errorMessage.style.display = "block";
+      }
+      function hideError() {
+        document.getElementById("error-message").style.display = "none";
+      }
       function validateForm(event) {
         event.preventDefault();
+        hideError();
         const imagelink = document.getElementById("image-link").value.trim();
         if (imagelink.startsWith("http")) {
           if (confirmImageLink(imagelink)) {
@@ -88,7 +102,7 @@
             document.getElementById("image-link").focus();
           }
         } else {
-          alert("Invalid link. Please try again.");
+          showError("Invalid link. Please try again.");
         }
       }
       function downloadFile() {
@@ -97,9 +111,7 @@
         saveAs(blob, "theme.flux");
       }
       function openYouTube() {
-        const imagelink = document.getElementById("image-link").value.trim();
-        const youtubeLink = "https://www.youtube.com/results?search_query=" + imagelink;
-        window.open(youtubeLink, "_blank");
+        window.open("https://www.youtube.com/watch?v=h7vrOI6L8YQ", "_blank");
       }
       document.getElementById("submit-btn").addEventListener("click", validateForm);
       document.getElementById("download-btn").addEventListener("click", downloadFile);
