@@ -2,18 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Fluxus Theme Generator</title>
-    <div style="text-align:center;">
-      <a href="https://discord.gg/fluxus" target="_blank">
-
-        <button style="background-color: #0080ff; color: white; padding: 10px 20px; font-size: 16px; border: none; border-radius: 5px;">Join Our Discord Server!</button>
-
-      </a>
-    </div>
-    <a href="https://www.youtube.com/watch?v=h7vrOI6L8YQ" target="_blank">
-      <button style="position: absolute; top: 10px; left: 10px;">How To Use</button>
-    </a>
-    
+   <title>Fluxus Theme Generator</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -56,21 +45,18 @@
     </style>
   </head>
   <body>
-    
     <h1>Fluxus Theme Generator ( Windows )</h1>
-
     <form>
       <label for="image-link">Enter image link:</label>
       <input type="text" id="image-link" name="image-link">
       <button type="submit" id="submit-btn">Submit</button>
     </form>
-    <div id="output-box"></div>
-    
+    <div id="output-box"></>
+    <button onclick="downloadFile()">Download Theme</button>
     <script>
       function confirmImageLink(imagelink) {
         return confirm("Image link is: " + imagelink + " Are you sure?");
       }
-      
       function validateForm(event) {
         event.preventDefault();
         const imagelink = document.getElementById("image-link").value.trim();
@@ -91,8 +77,13 @@
           alert("Invalid link. Please try again.");
         }
       }
-      
+      function downloadFile() {
+        const output = document.getElementById("output-box").querySelector("textarea").value;
+        const blob = new Blob([output], {type: "text/plain;charset=utf-8"});
+        saveAs(blob, "theme.flux");
+      }
       document.getElementById("submit-btn").addEventListener("click", validateForm);
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
   </body>
 </html>
