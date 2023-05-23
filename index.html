@@ -42,6 +42,15 @@
         box-sizing: border-box;
         margin-top: 10px;
       }
+      .button-container {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 10px;
+      }
+      .button-container button {
+        margin-left: 10px;
+      }
     </style>
   </head>
   <body>
@@ -49,10 +58,12 @@
     <form>
       <label for="image-link">Enter image link:</label>
       <input type="text" id="image-link" name="image-link">
-      <button type="submit" id="submit-btn">Submit</button>
+      <div class="button-container">
+        <button type="submit" id="submit-btn">Submit</button>
+        <button type="button" id="download-btn" style="display: none;">Download Theme</button>
+      </div>
     </form>
     <div id="output-box"></div>
-    <button onclick="downloadFile()">Download Theme</button>
     <script>
       function confirmImageLink(imagelink) {
         return confirm("Image link is: " + imagelink + " Are you sure?");
@@ -69,6 +80,7 @@
             };
             const outputBox = document.getElementById("output-box");
             outputBox.innerHTML = "<textarea readonly>" + JSON.stringify(output, null, 4) + "</textarea>";
+            document.getElementById("download-btn").style.display = "block";
           } else {
             document.getElementById("image-link").value = "";
             document.getElementById("image-link").focus();
@@ -83,7 +95,9 @@
         saveAs(blob, "theme.flux");
       }
       document.getElementById("submit-btn").addEventListener("click", validateForm);
+      document.getElementById("download-btn").addEventListener("click", downloadFile);
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
   </body>
 </html>
+
