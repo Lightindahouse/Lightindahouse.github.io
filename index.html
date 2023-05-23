@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-   <meta charset="UTF-8">
+   meta charset="UTF-8">
     <title>Fluxus Theme Generator</title>
     <style>
       body {
@@ -61,6 +61,7 @@
       <div class="button-container">
         <button type="submit" id="submit-btn">Submit</button>
         <button type="button" id="download-btn" style="display: none;">Download Theme</button>
+        <button type="button" id="youtube-btn" style="display: none;">YouTube</button>
       </div>
     </form>
     <div id="output-box"></div>
@@ -81,6 +82,7 @@
             const outputBox = document.getElementById("output-box");
             outputBox.innerHTML = "<textarea readonly>" + JSON.stringify(output, null, 4) + "</textarea>";
             document.getElementById("download-btn").style.display = "block";
+            document.getElementById("youtube-btn").style.display = "block";
           } else {
             document.getElementById("image-link").value = "";
             document.getElementById("image-link").focus();
@@ -94,10 +96,15 @@
         const blob = new Blob([output], {type: "text/plain;charset=utf-8"});
         saveAs(blob, "theme.flux");
       }
+      function openYouTube() {
+        const imagelink = document.getElementById("image-link").value.trim();
+        const youtubeLink = "https://www.youtube.com/results?search_query=" + imagelink;
+        window.open(youtubeLink, "_blank");
+      }
       document.getElementById("submit-btn").addEventListener("click", validateForm);
       document.getElementById("download-btn").addEventListener("click", downloadFile);
+      document.getElementById("youtube-btn").addEventListener("click", openYouTube);
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
   </body>
 </html>
-
