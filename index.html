@@ -22,16 +22,25 @@
         margin-bottom: 10px;
       }
       button {
-        background-color: #de1111;
-        color: white;
         padding: 12px 20px;
         border: none;
         border-radius: 4px;
         cursor: pointer;
         margin-top: 10px;
       }
-      button:hover {
+      button.red {
+        background-color: #de1111;
+        color: white;
+      }
+      button.red:hover {
         background-color: #650303;
+      }
+      button.blue {
+        background-color: #007bff;
+        color: white;
+      }
+      button.blue:hover {
+        background-color: #0056b3;
       }
       textarea {
         width: 100%;
@@ -47,6 +56,11 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 10px;
+      }
+      .discord-btn-container {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
       }
       .button-container {
         display: flex;
@@ -66,15 +80,18 @@
   <body>
     <h1>Fluxus Theme Generator (Windows)</h>
     <div class="top-buttons">
-      <button type="button" id="youtube-btn">YouTube</button>
-      <button type="button" id="discord-btn">Join our Discord server</button>
+      <button type="button" id="youtube-btn" class="red">YouTube</button>
+      <div class="discord-btn-container">
+        <button type="button" id="discord-btn" class="blue">Join our Discord server</button>
+      </div>
     </div>
     <form>
       <label for="image-link">Enter image link:</label>
       <input type="text" id="image-link" name="image-link">
       <div class="button-container">
-        <button type="submit" id="submit-btn">Submit</button>
-        <button type="button" id="download-btn" style="display: none;">Download Theme</button>
+        <button type="submit" id="submit-btn" class="red">Submit</button>
+        <button type="button" id="download-btn" class="red" style="display: none;">Download Theme</button>
+        <button type="button" id="copy-btn" class="red" style="display: none;">Copy to Clipboard</button>
       </div>
       <div id="error-message" class="error-message" style="display: none;"></div>
     </form>
@@ -105,6 +122,7 @@
             const outputBox = document.getElementById("output-box");
             outputBox.innerHTML = "<textarea readonly>" + JSON.stringify(output, null, 4) + "</textarea>";
             document.getElementById("download-btn").style.display = "block";
+            document.getElementById("copy-btn").style.display = "block";
           } else {
             document.getElementById("image-link").value = "";
             document.getElementById("image-link").focus();
@@ -118,6 +136,12 @@
         const blob = new Blob([output], {type: "text/plain;charset=utf-8"});
         saveAs(blob, "theme.flux");
       }
+      function copyToClipboard() {
+        const output = document.getElementById("output-box").querySelector("textarea");
+        output.select();
+        document.execCommand("copy");
+        alert("Copied to clipboard!");
+      }
       function openYouTube() {
         window.open("https://www.youtube.com/watch?v=h7vrOI6L8YQ", "_blank");
       }
@@ -126,6 +150,7 @@
       }
       document.getElementById("submit-btn").addEventListener("click", validateForm);
       document.getElementById("download-btn").addEventListener("click", downloadFile);
+      document.getElementById("copy-btn").addEventListener("click", copyToClipboard);
       document.getElementById("youtube-btn").addEventListener("click", openYouTube);
       document.getElementById("discord-btn").addEventListener("click", openDiscord);
     </script>
