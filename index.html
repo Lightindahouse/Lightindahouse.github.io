@@ -1,159 +1,28 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Fluxus Theme Generator</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        color: #dedede;
-        background-color: #0a0c0d;
-      }
-      label {
-        display: block;
-        margin-bottom: 10px;
-      }
-      input[type="text"] {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        margin-bottom: 10px;
-      }
-      button {
-        padding: 12px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-top: 10px;
-      }
-      button.red {
-        background-color: #de1111;
-        color: white;
-      }
-      button.red:hover {
-        background-color: #650303;
-      }
-      button.blue {
-        background-color: #007bff;
-        color: white;
-      }
-      button.blue:hover {
-        background-color: #0056b3;
-      }
-      textarea {
-        width: 100%;
-        height: 200px;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        margin-top: 10px;
-      }
-      .top-buttons {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-      .discord-btn-container {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-      .button-container {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        margin-top: 10px;
-      }
-      .button-container button {
-        margin-left: 10px;
-      }
-      .error-message {
-        color: #ff0000;
-        margin-top: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Fluxus Theme Generator (Windows)</h>
-    <div class="top-buttons">
-      <button type="button" id="youtube-btn" class="red">YouTube</button>
-      <div class="discord-btn-container">
-        <button type="button" id="discord-btn" class="blue">Join our Discord server</button>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Profile</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-background">
+  <div class="container">
+    <div class="profile-pic">
+      <img src="profile-pic.gif" alt="Profile Picture">
+      <div class="overlay">
+        <h3>Hover for Bio</h3>
       </div>
     </div>
-    <form>
-      <label for="image-link">Enter image link:</label>
-      <input type="text" id="image-link" name="image-link">
-      <div class="button-container">
-        <button type="submit" id="submit-btn" class="red">Submit</button>
-        <button type="button" id="download-btn" class="red" style="display: none;">Download Theme</button>
-        <button type="button" id="copy-btn" class="red" style="display: none;">Copy to Clipboard</button>
-      </div>
-      <div id="error-message" class="error-message" style="display: none;"></div>
-    </form>
-    <div id="output-box"></div>
-    <script>
-      function confirmImageLink(imagelink) {
-        return confirm("Image link is: " + imagelink + " Are you sure?");
-      }
-      function showError(message) {
-        const errorMessage = document.getElementById("error-message");
-        errorMessage.textContent = message;
-        errorMessage.style.display = "block";
-      }
-      function hideError() {
-        document.getElementById("error-message").style.display = "none";
-      }
-      function validateForm(event) {
-        event.preventDefault();
-        hideError();
-        const imagelink = document.getElementById("image-link").value.trim();
-        if (imagelink.startsWith("http")) {
-          if (confirmImageLink(imagelink)) {
-            const output = {
-              "main_grid": imagelink,
-              "top_bar": "#0000ffff",
-              "tab_background": "#0000ffff"
-            };
-            const outputBox = document.getElementById("output-box");
-            outputBox.innerHTML = "<textarea readonly>" + JSON.stringify(output, null, 4) + "</textarea>";
-            document.getElementById("download-btn").style.display = "block";
-            document.getElementById("copy-btn").style.display = "block";
-          } else {
-            document.getElementById("image-link").value = "";
-            document.getElementById("image-link").focus();
-          }
-        } else {
-          showError("Invalid link. Please try again.");
-        }
-      }
-      function downloadFile() {
-        const output = document.getElementById("output-box").querySelector("textarea").value;
-        const blob = new Blob([output], {type: "text/plain;charset=utf-8"});
-        saveAs(blob, "theme.flux");
-      }
-      function copyToClipboard() {
-        const output = document.getElementById("output-box").querySelector("textarea");
-        output.select();
-        document.execCommand("copy");
-        alert("Copied to clipboard!");
-      }
-      function openYouTube() {
-        window.open("https://www.youtube.com/watch?v=h7vrOI6L8YQ", "_blank");
-      }
-      function openDiscord() {
-        window.open("https://discord.gg/fluxus", "_blank");
-      }
-      document.getElementById("submit-btn").addEventListener("click", validateForm);
-      document.getElementById("download-btn").addEventListener("click", downloadFile);
-      document.getElementById("copy-btn").addEventListener("click", copyToClipboard);
-      document.getElementById("youtube-btn").addEventListener("click", openYouTube);
-      document.getElementById("discord-btn").addEventListener("click", openDiscord);
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-  </body>
+    <div class="info-container">
+      <h2>lightindahouse</h2>
+      <p>Hi! I'm a 16 year old self taught fullstack developer with a passion for building things from the ground up. I love diving deep into both front end and back end development to create user-friendly and functional applications, but im more of a backend person.</p>
+      <audio controls id="audio-player" autoplay> <source src="Happy Nation.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.8.3/anime.min.js"></script>
+  <script src="script.js"></script>
+</body>
 </html>
