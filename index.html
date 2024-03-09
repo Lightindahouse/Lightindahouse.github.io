@@ -22,6 +22,16 @@
       </audio>
     </div>
   </div>
+    <script>
+    const audioElement = document.getElementById("audio-player");
+    const playButton = document.getElementById("play-button");
+
+    // Seek to 59 seconds when clicking the play button
+    playButton.addEventListener("click", () => {
+      audioElement.currentTime = 59;
+      audioElement.play(); // Explicitly play the audio
+    });
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.8.3/anime.min.js"></script>
   <script src="script.js"></script>
 </body>
