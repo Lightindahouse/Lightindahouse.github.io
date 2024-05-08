@@ -1,38 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Me</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send to Discord</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="dark-background">
-  <div class="container">
-    <div class="profile-pic">
-      <img src="profile-pic.gif" alt="Profile Picture">
-      <div class="overlay">
-        <h3>Hover for Bio</h3>
-      </div>
+<body>
+    <div class="container">
+        <h1>Send Message to Discord</h1>
+        <form id="message-form">
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" placeholder="Type your message here..." rows="4"></textarea><br>
+            <button type="submit">Send</button>
+        </form>
+        <div id="response" class="hidden"></div>
     </div>
-    <div class="info-container">
-      <h2>lightindahouse</h2>
-      <p>Hi! I'm a 16 year old self taught fullstack developer with a passion for building things from the ground up. I love diving deep into both front end and back end development to create user-friendly and functional applications, but im more of a backend person.</p>
-      <audio controls id="audio-player" autoplay> <source src="Happy Nation.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-    </div>
-  </div>
-    <script>
-    const audioElement = document.getElementById("audio-player");
-    const playButton = document.getElementById("play-button");
 
-    // Seek to 59 seconds when clicking the play button
-    playButton.addEventListener("click", () => {
-      audioElement.currentTime = 59;
-      audioElement.play(); // Explicitly play the audio
-    });
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.8.3/anime.min.js"></script>
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
